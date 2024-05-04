@@ -1,0 +1,26 @@
+<IfModule mod_ssl.c>
+	<VirtualHost _default_:443>
+		ServerAdmin {{ urbackup_serveradmin }}
+		ServerName {{ urbackup_servername }}
+		DocumentRoot /usr/share/urbackup/www/
+
+		ServerSignature Off
+		SSLProxyEngine On
+		ProxyPreserveHost On
+		ProxyPass "/x" "fcgi://localhost:55413"
+
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+		SSLEngine on
+		SSLCertificateFile	{{ urbackup_certificate_file }}
+		SSLCertificateKeyFile {{ urbackup_certifcate_keyfile }}
+
+		<FilesMatch "\.(cgi|shtml|phtml|php)$">
+				SSLOptions +StdEnvVars
+		</FilesMatch>
+		<Directory /usr/lib/cgi-bin>
+				SSLOptions +StdEnvVars
+		</Directory>
+	</VirtualHost>
+</IfModule>
