@@ -1,0 +1,18 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: role-urbackup-server
+  author: Bitfinity / L. Rutten
+  description: UrBackup server on Ubuntu
+  company: "Bitfinity"
+  license: "license (BSD, MIT)"
+  min_ansible_version: 2.10
+  platforms:
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags:
+    - backup
+    - ubuntu
+    - urbackup
