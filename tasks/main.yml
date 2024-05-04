@@ -1,0 +1,20 @@
+---
+# Title: UrBackup server
+#
+# Author: Bitfinity / L. Rutten
+# Owner: Bitfinity / L. Rutten
+#
+# File: tasks/main.yml
+#
+# Description:
+#   Playbook for UrBackup server
+#   on a Ubuntu server.
+#
+- name: "Install UrBackup server"
+  include_tasks: 01-urbackup-server.yml
+    
+- name: "Install and configure Apache2 for UrBackup server"
+  include_tasks: 02-apache2.yml
+
+- name: "Install and configure UFW Firewall for UrBackup server"
+  include_tasks: 03-firewall.yml
