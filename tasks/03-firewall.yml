@@ -1,0 +1,43 @@
+---
+# Title: UrBackup server
+#
+# Author: Bitfinity / L. Rutten
+# Owner: Bitfinity / L. Rutten
+#
+# File: tasks/03-firewall.yml
+#
+# Description:
+#   Playbook for UrBackup server
+#   on a Ubuntu server.
+#
+- name: "Add firewall profile for openssh traffic on port 22/tcp and enable firewall"
+  community.general.ufw:
+    rule: allow
+    name: openssh
+    state: enabled
+    
+- name: "Add firewall profile for allow Apache2 traffic on port 80/tcp"
+  community.general.ufw:
+    rule: allow
+    name: Apache
+  when: urbackup_url_type == 'http'
+  
+- name: "Delete firewall profile for block Apache2 traffic on port 80/tcp"
+  community.general.ufw:
+    delete: yes
+    name: Apache
+    state: enabled
+  when: urbackup_url_type == 'https'
+  
+- name: "Add firewall profile for allow Apache2 traffic on port 443/tcp"
+  community.general.ufw:
+    rule: allow
+    name: Apache Secure
+  when: urbackup_url_type == 'https'
+  
+- name: "Delete firewall for block Apache2 traffic on port 443/tcp"
+  community.general.ufw:
+    delete: yes
+    name: Apache Secure
+    state: enabled
+  when: urbackup_url_type == 'http'
