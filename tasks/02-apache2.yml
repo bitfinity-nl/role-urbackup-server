@@ -1,0 +1,62 @@
+---
+# Title: UrBackup server
+#
+# Author: Bitfinity / L. Rutten
+# Owner: Bitfinity / L. Rutten
+#
+# File: tasks/02-apache2.yml
+#
+# Description:
+#   Playbook for UrBackup server
+#   on a Ubuntu server.
+#
+- name: "Install APT packages"
+  ansible.builtin.apt:
+    pkg:
+    - apache2
+    state: present
+
+- name: Enable the Apache2 module wsgi
+  community.general.apache2_module:
+    state: present
+    name: "{{ item }}"
+  with_items:
+    - proxy
+    - proxy_fcgi
+    - ssl
+  notify: restart_apache2
+
+- name: "Transfer Apache2 template"
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: root
+    group: root
+    mode: 0644
+  with_items:
+    - { src: 'urbackup.conf.j2', dest: '/etc/apache2/sites-available/urbackup.conf' }
+    - { src: 'urbackup-ssl.conf.j2', dest: '/etc/apache2/sites-available/urbackup-ssl.conf' }
+  notify: reload_apache2
+  
+- name: "Disable 000-default.conf and default-ssl.conf"
+  ansible.builtin.command: a2dissite 000-default.conf default-ssl.conf
+
+- name: "Enable urbackup.conf on port 80/tcp"
+  ansible.builtin.command: a2ensite urbackup.conf
+  when: urbackup_url_type == 'http'
+  notify: reload_apache2
+
+- name: "Disable urbackup.conf on port 80/tcp"
+  ansible.builtin.command: a2dissite urbackup.conf
+  when: urbackup_url_type == 'https'
+  notify: reload_apache2
+  
+- name: "Enable urbackup-ssl.conf on port 443/tcp"
+  ansible.builtin.command: a2ensite urbackup-ssl.conf
+  when: urbackup_url_type == 'https'
+  notify: reload_apache2
+    
+- name: "Disable urbackup-ssl.conf on port 443/tcp"
+  ansible.builtin.command: a2dissite urbackup-ssl.conf
+  when: urbackup_url_type == 'http'
+  notify: reload_apache2
