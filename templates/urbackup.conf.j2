@@ -1,0 +1,14 @@
+<VirtualHost *:80>
+
+   ServerAdmin {{ urbackup_serveradmin }}
+   ServerName {{ urbackup_servername }}
+   DocumentRoot /usr/share/urbackup/www/
+
+   ServerSignature Off
+   ProxyPreserveHost On
+   ProxyPass "/x" "fcgi://localhost:55413"
+
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+   CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
