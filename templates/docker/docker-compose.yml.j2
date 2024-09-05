@@ -10,7 +10,7 @@ services:
       - PGID={{ urbackup_docker_gid }}  # Enter the GID of the user who should own the files here
       - TZ={{ urbackup_docker_tz }} # Enter your timezone
     volumes:
-      - {{ urbackup_docker_db_path }}:/var/urbackup
+      - {{ urbackup_docker_database_path }}:/var/urbackup
       - {{ urbackup_docker_backup_path }}:/backups
       # Uncomment the next line if you want to bind-mount the www-folder
       #- /path/to/wwwfolder:/usr/share/urbackup
