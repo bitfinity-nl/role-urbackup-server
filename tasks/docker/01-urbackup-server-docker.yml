@@ -10,11 +10,45 @@
 #   Taskfile for installing UrBackup server
 #   on a Ubuntu server with docker.
 #
+- name: "Create group 'urbackup' for urbackup on host '{{ ansible_hostname }}'"
+  ansible.builtin.group:
+    name: urbackup
+    state: present
+    
+- name: "Create user 'urbackup' for urbackup on host '{{ ansible_hostname }}'"
+  ansible.builtin.user:
+    name: urbackup
+    shell: /bin/bash
+    group: urbackup
 
-- name: "Create NFS directory structure"
+- name: "Create directory '{{ urbackup_docker_backup_path }}' for the database on host structure on host '{{ ansible_hostname }}'"
   ansible.builtin.file:
     path: "{{ urbackup_docker_backup_path }}"
     state: directory
     owner: urbackup
     group: urbackup
-    mode: 0755
+    mode: '0750'
+    
+- name: "Create directory '{{ urbackup_docker_backup_path }}' for backups on host structure on host '{{ ansible_hostname }}'"
+  ansible.builtin.file:
+    path: "{{ urbackup_docker_backup_path }}"
+    state: directory
+    owner: urbackup
+    group: urbackup
+    mode: '0750'
+
+- name: "Create directory '/opt/urbackup' for urbackup docker on host '{{ ansible_hostname }}'"
+  ansible.builtin.file:
+    path: "/opt/urbackup"
+    state: directory
+    owner: root
+    group: root
+    mode: '0750'
+
+- name: "Transer template 'templates/docker/docker-compose.yml.j2' to '/opt/urbackup/docker-compose.yml' on host"
+  ansible.builtin.template:
+    src: templates/docker/docker-compose.yml.j2
+    dest: /opt/urbackup/docker-compose.yml
+    owner: root
+    group: root
+    mode: '0750'
