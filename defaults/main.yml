@@ -3,6 +3,6 @@
 urbackup_docker_uid           : '1000'
 urbackup_docker_gid           : '100'
 urbackup_docker_tz            : 'Europe/Amsterdam'
-urbackup_docker_database_path : ''
-urbackup_docker_backup_path   : ''
+urbackup_docker_database_path : '/mnt/urbackup/database'
+urbackup_docker_backup_path   : '/mnt/urbackup/backups'
 
