@@ -1,5 +1,7 @@
 ---
 
+
+
 urbackup_docker_docker        : 'true'
 urbackup_docker_uid           : '1000'
 urbackup_docker_gid           : '100'
@@ -7,3 +9,9 @@ urbackup_docker_tz            : 'Europe/Amsterdam'
 urbackup_docker_database_path : '/mnt/urbackup/database'
 urbackup_docker_backup_path   : '/mnt/urbackup/backup'
 
+
+urbackup_serveradmin          : 'backup@example.com'
+urbackup_servername           : '{{ ansible_hostname }}'
+urbackup_certificate_file     : '/etc/selfcert/live/{{ urbackup_servername }}/fullchain.pem'
+urbackup_certifcate_keyfile   : '/etc/selfcert/live/{{ urbackup_servername }}/privkey.pem'
+urbackup_url_type             : 'https
