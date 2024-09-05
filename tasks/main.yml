@@ -12,9 +12,16 @@
 #
 - name: "Install UrBackup server"
   include_tasks: 01-urbackup-server.yml
-    
+  when: urbackup_docker_docker == 'false'
+  
+- name: "Install UrBackup server docker on host {{ ansible_hostname }}"
+  include_tasks: docker/01-urbackup-server-docker.yml
+  when: urbackup_docker_docker == 'true'
+
 - name: "Install and configure Apache2 for UrBackup server"
   include_tasks: 02-apache2.yml
-
+  when: urbackup_docker_docker == 'false'
+  
 - name: "Install and configure UFW Firewall for UrBackup server"
   include_tasks: 03-firewall.yml
+  when: urbackup_docker_docker == 'false'
