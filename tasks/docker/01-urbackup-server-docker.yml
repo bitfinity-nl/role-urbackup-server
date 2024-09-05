@@ -52,3 +52,8 @@
     owner: root
     group: root
     mode: '0750'
+
+- name: "Run docker-compose.yml for UrBackup on host '{{ inventory_hostname }}'"
+  ansible.builtin.command: docker compose up -d
+  args:
+    chdir: /opt/urbackup
