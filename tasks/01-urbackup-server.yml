@@ -20,6 +20,7 @@
     pkg:
 #    - nfs-common
 #    - nfs-kernel-server
+    - gnupg
     - urbackup-server
     update_cache: yes
     state: present
