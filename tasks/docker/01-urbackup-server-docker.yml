@@ -1,0 +1,12 @@
+---
+# Title: UrBackup server
+#
+# Author: Bitfinity / L. Rutten
+# Owner: Bitfinity / L. Rutten
+#
+# File: tasks/docker/01-urbackup-server-docker.yml
+#
+# Description:
+#   Taskfile for installing UrBackup server
+#   on a Ubuntu server with docker.
+#
