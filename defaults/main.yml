@@ -14,4 +14,4 @@ urbackup_serveradmin          : 'backup@example.com'
 urbackup_servername           : '{{ ansible_hostname }}'
 urbackup_certificate_file     : '/etc/selfcert/live/{{ urbackup_servername }}/fullchain.pem'
 urbackup_certifcate_keyfile   : '/etc/selfcert/live/{{ urbackup_servername }}/privkey.pem'
-urbackup_url_type             : 'https
+urbackup_url_type             : 'https'
