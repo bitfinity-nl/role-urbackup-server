@@ -45,7 +45,7 @@
     group: root
     mode: '0750'
 
-- name: "Transer template 'templates/docker/docker-compose.yml.j2' to '/opt/urbackup/docker-compose.yml' on host"
+- name: "Transfer template 'templates/docker/docker-compose.yml.j2' to '/opt/urbackup/docker-compose.yml' on host '{{ ansible_hostname }}'"
   ansible.builtin.template:
     src: templates/docker/docker-compose.yml.j2
     dest: /opt/urbackup/docker-compose.yml
