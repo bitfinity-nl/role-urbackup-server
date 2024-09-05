@@ -18,27 +18,27 @@
 - name: "Install APT packages"
   ansible.builtin.apt:
     pkg:
-    - nfs-common
-    - nfs-kernel-server
+#    - nfs-common
+#    - nfs-kernel-server
     - urbackup-server
     update_cache: yes
     state: present
 
-- name: "Create NFS directory structure"
-  ansible.builtin.file:
-    path: "{{ urbackup_backup_path }}"
-    state: directory
-    owner: urbackup
-    group: urbackup
-    mode: 0755
+#- name: "Create NFS directory structure"
+#  ansible.builtin.file:
+#    path: "{{ urbackup_backup_path }}"
+#    state: directory
+#    owner: urbackup
+#    group: urbackup
+#    mode: 0755
 
-- name: "Mount NFS path for UrBackup"
-  ansible.posix.mount:
-    src: "{{ urbackup_nfs_path}}"
-    path: "{{ urbackup_backup_path }}"
-    opts: defaults
-    state: mounted
-    fstype: nfs4
+#- name: "Mount NFS path for UrBackup"
+#  ansible.posix.mount:
+#    src: "{{ urbackup_nfs_path}}"
+#    path: "{{ urbackup_backup_path }}"
+#    opts: defaults
+#    state: mounted
+#    fstype: nfs4
 
 - name: "ufw allow traffic on specific ports"
   community.general.ufw:
