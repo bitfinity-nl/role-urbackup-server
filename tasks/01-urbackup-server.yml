@@ -10,6 +10,11 @@
 #   Playbook for UrBackup server
 #   on a Ubuntu server.
 #
+- name: "Install APT packages (requirements)"
+  ansible.builtin.apt:
+    pkg:
+    - gnupg
+    
 - name: "Add repository"
   ansible.builtin.apt_repository:
     repo: ppa:uroni/urbackup
@@ -20,7 +25,6 @@
     pkg:
 #    - nfs-common
 #    - nfs-kernel-server
-    - gnupg
     - urbackup-server
     update_cache: yes
     state: present
