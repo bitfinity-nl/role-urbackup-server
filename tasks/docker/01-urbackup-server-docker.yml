@@ -10,3 +10,11 @@
 #   Taskfile for installing UrBackup server
 #   on a Ubuntu server with docker.
 #
+
+- name: "Create NFS directory structure"
+  ansible.builtin.file:
+    path: "{{ urbackup_docker_backup_path }}"
+    state: directory
+    owner: urbackup
+    group: urbackup
+    mode: 0755
