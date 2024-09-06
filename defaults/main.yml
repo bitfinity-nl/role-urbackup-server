@@ -12,6 +12,7 @@ urbackup_docker_backup_path   : '/mnt/urbackup/backup'
 
 urbackup_serveradmin          : 'backup@example.com'
 urbackup_servername           : '{{ ansible_hostname }}'
+urbackup_domainname           : 'www.example.com'
 urbackup_certificate_file     : '/etc/selfcert/live/{{ urbackup_servername }}/fullchain.pem'
 urbackup_certifcate_keyfile   : '/etc/selfcert/live/{{ urbackup_servername }}/privkey.pem'
 urbackup_url_type             : 'https'
