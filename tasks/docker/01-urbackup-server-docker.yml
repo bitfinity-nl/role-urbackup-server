@@ -29,13 +29,13 @@
     group: urbackup
     mode: '0750'
     
-- name: "Create directory '{{ urbackup_docker_backup_path }}' for backups on host structure on host '{{ ansible_hostname }}'"
-  ansible.builtin.file:
-    path: "{{ urbackup_docker_backup_path }}"
-    state: directory
-    owner: urbackup
-    group: urbackup
-    mode: '0750'
+#- name: "Create directory '{{ urbackup_docker_backup_path }}' for backups on host structure on host '{{ ansible_hostname }}'"
+#  ansible.builtin.file:
+#    path: "{{ urbackup_docker_backup_path }}"
+#    state: directory
+#    owner: urbackup
+#    group: urbackup
+#    mode: '0750'
 
 - name: "Create directory '/opt/urbackup' for urbackup docker on host '{{ ansible_hostname }}'"
   ansible.builtin.file:
