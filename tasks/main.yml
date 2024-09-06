@@ -20,6 +20,7 @@
 
 - name: "Install and configure Apache2 for UrBackup server"
   include_tasks: 02-apache2.yml
+  when: urbackup_docker_docker == 'false'
   
 - name: "Install and configure UFW Firewall for UrBackup server"
   include_tasks: 03-firewall.yml
