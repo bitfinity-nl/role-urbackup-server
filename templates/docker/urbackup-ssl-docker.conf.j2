@@ -1,0 +1,27 @@
+<VirtualHost *:80>
+
+  ServerName {{ urbackup_domainname }}
+  Redirect permanent / https://{{ urbackup_domainname }}/
+
+</VirtualHost>
+
+<VirtualHost *:443>
+
+  ServerName {{ urbackup_domainname }}
+  ProxyPreserveHost Off
+
+  SSLEngine on
+  SSLProtocol all -SSLv2 -SSLv3
+  SSLProxyEngine On
+  SSLCertificateFile {{ urbackup_certificate_file }}
+  SSLCertificateKeyFile {{ urbackup_certifcate_keyfile }}
+  
+  <Location />
+      Order allow,deny
+      Allow from all
+      ProxyPass http://localhost:55414 max=20 flushpackets=on
+      ProxyPassReverse http://localhost:55414 
+  </Location>
+
+</VirtualHost>
+CustomLog /var/log/apache2/urbackup.log common env=!dontlog
