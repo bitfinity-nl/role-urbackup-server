@@ -21,14 +21,7 @@
     shell: /bin/bash
     group: urbackup
 
-- name: "Create directory '{{ urbackup_docker_backup_path }}' for the database on host structure on host '{{ ansible_hostname }}'"
-  ansible.builtin.file:
-    path: "{{ urbackup_docker_backup_path }}"
-    state: directory
-    owner: urbackup
-    group: urbackup
-    mode: '0750'
-    
+
 #- name: "Create directory '{{ urbackup_docker_backup_path }}' for backups on host structure on host '{{ ansible_hostname }}'"
 #  ansible.builtin.file:
 #    path: "{{ urbackup_docker_backup_path }}"
@@ -43,6 +36,14 @@
     state: directory
     owner: root
     group: root
+    mode: '0750'
+
+- name: "Create directory '{{ urbackup_docker_backup_path }}' for the database on host structure on host '{{ ansible_hostname }}'"
+  ansible.builtin.file:
+    path: "{{ urbackup_docker_backup_path }}"
+    state: directory
+    owner: urbackup
+    group: urbackup
     mode: '0750'
 
 - name: "Transfer template 'templates/docker/docker-compose.yml.j2' to '/opt/urbackup/docker-compose.yml' on host '{{ ansible_hostname }}'"
