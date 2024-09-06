@@ -23,6 +23,7 @@
   with_items:
     - proxy
     - proxy_fcgi
+    - proxy_http
     - ssl
   notify: restart_apache2
 
