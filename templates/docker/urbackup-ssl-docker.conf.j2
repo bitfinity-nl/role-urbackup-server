@@ -18,13 +18,12 @@
   SSLCertificateFile {{ urbackup_certificate_file }}
   SSLCertificateKeyFile {{ urbackup_certifcate_keyfile }}
 
-  
   # -- UrBackup server --
   ProxyPass / http://localhost:55414/
   ProxyPassReverse / http://localhost:55414/
   
-  ErrorLog ${APACHE_LOG_DIR}/semui-error.log
-  CustomLog ${APACHE_LOG_DIR}/semui-access.log combined
+  ErrorLog ${APACHE_LOG_DIR}/urbackup-error.log
+  CustomLog ${APACHE_LOG_DIR}/urbackup-access.log combined
   
 </VirtualHost>
 
