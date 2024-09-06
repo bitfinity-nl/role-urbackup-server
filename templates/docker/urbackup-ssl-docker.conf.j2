@@ -5,6 +5,8 @@
 
 </VirtualHost>
 
+<IfModule mod_ssl.c>
+
 <VirtualHost *:443>
 
   ServerName {{ urbackup_domainname }}
@@ -15,13 +17,22 @@
   SSLProxyEngine On
   SSLCertificateFile {{ urbackup_certificate_file }}
   SSLCertificateKeyFile {{ urbackup_certifcate_keyfile }}
-  
-  <Location />
-      Order allow,deny
-      Allow from all
-      ProxyPass http://localhost:55414 max=20 flushpackets=on
-      ProxyPassReverse http://localhost:55414 
-  </Location>
 
+  
+  # -- Ansible Semaphore UI --
+  ProxyPass / http://localhost:55414/
+  ProxyPassReverse / http://localhost:55414/
+  
+  #  <Location />
+#      Order allow,deny
+#      Allow from all
+#      ProxyPass http://localhost:55414 max=20 flushpackets=on
+#      ProxyPassReverse http://localhost:55414 
+#  </Location>
+
+  ErrorLog ${APACHE_LOG_DIR}/semui-error.log
+  CustomLog ${APACHE_LOG_DIR}/semui-access.log combined
+  
 </VirtualHost>
-CustomLog /var/log/apache2/urbackup.log common env=!dontlog
+
+</IfModule>
