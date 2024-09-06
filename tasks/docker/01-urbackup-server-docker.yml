@@ -57,3 +57,6 @@
   ansible.builtin.command: docker compose up -d
   args:
     chdir: /opt/urbackup
+
+- name: "Install and configure Apache2 for UrBackup server (docker)"
+  include_tasks: tasks/docker/02-apache2-docker.yml
