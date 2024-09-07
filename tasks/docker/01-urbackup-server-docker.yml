@@ -59,7 +59,7 @@
   args:
     chdir: /opt/urbackup
 
-- name: "ufw allow traffic on specific ports"
+- name: "ufw allow traffic on specific ports for UrBackup docker on host '{{ ansible_hostname }}'"
   community.general.ufw:
     rule: allow
     direction: "{{ item.dir }}"
