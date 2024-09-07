@@ -59,5 +59,15 @@
   args:
     chdir: /opt/urbackup
 
+- name: "ufw allow traffic on specific ports"
+  community.general.ufw:
+    rule: allow
+    direction: "{{ item.dir }}"
+    port: "{{ item.port }}"
+    proto: "{{ item.proto }}"
+  with_items:
+    - { dir: 'in', port: '55415', proto: 'tcp' }
+    - { dir: 'out', port: '35623', proto: 'udp' }
+    
 - name: "Install and configure Apache2 for UrBackup server (docker)"
   include_tasks: tasks/docker/02-apache2-docker.yml
