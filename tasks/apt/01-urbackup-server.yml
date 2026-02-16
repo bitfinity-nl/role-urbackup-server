@@ -45,6 +45,10 @@
 #    state: mounted
 #    fstype: nfs4
 
+
+- name: "Install and configure Apache2 for UrBackup server"
+  include_tasks: apt/02-apache2.yml
+
 - name: "ufw allow traffic on specific ports"
   community.general.ufw:
     rule: allow
