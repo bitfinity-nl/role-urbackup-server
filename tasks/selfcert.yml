@@ -55,4 +55,4 @@
       -out /etc/apache2/ssl/urbackup.crt 
       -subj "/C=NL/ST=Limburg/L=Reuver/O=IT/CN={{ ansible_fqdn }}"
   when: not cert_file.stat.exists or needs_new_cert
-  notify: restart apache2
+  #notify: restart apache2
