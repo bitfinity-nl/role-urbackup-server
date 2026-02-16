@@ -18,5 +18,3 @@ urbackup_domainname           : 'www.example.com'
 urbackup_certificate_file     : '/etc/apache2/ssl/urbackup.crt'
 urbackup_certifcate_keyfile   : '/etc/apache2/ssl/urbackup.crt'
 urbackup_url_type             : 'https'
-
-pavilion_timedelta: 30
