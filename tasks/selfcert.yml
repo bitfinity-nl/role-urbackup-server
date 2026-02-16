@@ -12,17 +12,16 @@
   changed_when: false
 
 - name: Parse expiration date and check if it expires within 30 days
-  ansible.builtin.set_fact:
+  set_fact:
     needs_new_cert: >-
-      {{ 
-        not cert_file.stat.exists or 
-        (cert_expiry_raw.stdout.split('=')[1] | to_datetime('%b %d %H:%M:%S %Y %Z')) < 
-        (ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ') + pavilion_timedelta(days=30))
+      {{
+        not cert_file.stat.exists or
+        (cert_expiry_raw.stdout.split('=')[1] | to_datetime('%b %d %H:%M:%S %Y %Z')).strftime('%s') | int <
+        (ansible_date_time.epoch | int + (86400 * 30))
       }}
   vars:
-    # Helper to calculate 30 days in seconds if your Ansible version doesn't support complex timedeltas
-    expire_threshold_seconds: "{{ 30 * 84600 }}"
-  when: cert_file.stat.exists
+    # We berekenen 30 dagen in seconden: 30 dagen * 24 uur * 60 min * 60 sec
+    expiration_threshold_seconds: "{{ 30 * 86400 }}"
 
 - name: Create the directory for SSL certificates
   ansible.builtin.file:
