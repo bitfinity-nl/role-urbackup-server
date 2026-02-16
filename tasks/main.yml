@@ -10,7 +10,10 @@
 #   Playbook for UrBackup server
 #   on a Ubuntu server.
 #
-- name: "Install UrBackup server docker on host {{ ansible_hostname }}"
+- name: "Generate ECDSA selfsigned certificate for UrBackup server"
+  include_tasks: selfcert.yml
+  
+- name: "Install UrBackup server docker on host"
   include_tasks: docker/01-urbackup-server-docker.yml
   when: urbackup_docker_docker == 'true'
   
