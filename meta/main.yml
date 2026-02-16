@@ -1,5 +1,9 @@
 ---
-dependencies: []
+dependencies:
+  - src: https://github.com/bitfinity-nl/role-docker-engine.git
+    scm: git
+    version: main
+    name: role-docker-engine
 
 galaxy_info:
   role_name: role-urbackup-server
