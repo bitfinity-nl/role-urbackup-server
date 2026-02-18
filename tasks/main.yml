@@ -11,17 +11,6 @@
 #   on a Ubuntu server.
 #
 
-
-
-
-- name: "Mount NFS path for UrBackup"
-  ansible.posix.mount:
-    src: "{{ urbackup_nfs_path}}"
-    path: "{{ urbackup_backup_path }}"
-    opts: defaults
-    state: mounted
-    fstype: nfs4
-
 - name: "Install UrBackup server docker on host"
   include_tasks: docker/01-urbackup-server-docker.yml
   when: urbackup_docker_docker == 'true'
