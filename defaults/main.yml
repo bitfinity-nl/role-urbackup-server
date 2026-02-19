@@ -1,7 +1,14 @@
 ---
+#
+# Description:
+#   
 
+# -- UrBackup Storage model NFS --
+urbackup_nfs_share_use        : 'true'
+urbackup_nfs_share_source     : '192.168.0.1:/mnt/datastore-01/urbackup'
+urbackup_nfs_share_mountpoint : '/mnt/urbackup'
 
-
+# -- UrBackup server docker --
 urbackup_docker_docker        : 'true'
 urbackup_docker_uid           : '1000'
 urbackup_docker_gid           : '100'
@@ -9,10 +16,11 @@ urbackup_docker_tz            : 'Europe/Amsterdam'
 urbackup_docker_database_path : '/mnt/urbackup/database'
 urbackup_docker_backup_path   : '/mnt/urbackup/backup'
 
-
+# -- UrBackup server global settings --
 urbackup_serveradmin          : 'backup@example.com'
 urbackup_servername           : '{{ ansible_hostname }}'
 urbackup_domainname           : 'www.example.com'
 urbackup_certificate_file     : '/etc/selfcert/live/{{ urbackup_servername }}/fullchain.pem'
 urbackup_certifcate_keyfile   : '/etc/selfcert/live/{{ urbackup_servername }}/privkey.pem'
 urbackup_url_type             : 'https'
+
