@@ -1,0 +1,38 @@
+---
+# Title: NFS share
+#
+# File: tasks/common/storage-nfs.yml
+#
+# Description:
+#   
+- name: "Install APT packages"
+  ansible.builtin.apt:
+    pkg:
+    - nfs-common
+    - nfs-kernel-server
+    update_cache: yes
+    state: present
+
+- name: "Ensure mountpoint {{ urbackup_nfs_mountpoint }} exists"
+  ansible.builtin.file:
+    path: "{{ urbackup_nfs_mountpoint }}"
+    state: directory
+    owner: root
+    group: root
+    mode: '0000'  # Disable writing for everyone, if mounting fails.
+
+- name: "Mount NFS path for UrBackup server"
+  ansible.posix.mount:
+    src: "{{ nfs_share_source }}"
+    path: "{{ urbackup_nfs_mountpoint }}"
+    opts: defaults
+    state: mounted
+    fstype: nfs4
+
+- name: "Correct permissions on {{ urbackup_nfs_mountpoint} when mounted"
+  ansible.builtin.file:
+    path: "{{ urbackup_nfs_mountpoint }}"
+    state: directory
+    owner: urbackup
+    group: urbackup
+    mode: '0755'
