@@ -32,7 +32,7 @@
     state: mounted
     fstype: nfs4
 
-- name: "Correct permissions on '{{ urbackup_nfs_share_mountpoint}' when mounted"
+- name: "Correct permissions on '{{ urbackup_nfs_share_mountpoint}}' when mounted"
   ansible.builtin.file:
     path: "{{ urbackup_nfs_share_mountpoint }}"
     state: directory
