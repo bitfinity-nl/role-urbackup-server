@@ -4,7 +4,7 @@
 # Author: Bitfinity / L. Rutten
 # Owner: Bitfinity / L. Rutten
 #
-# File: tasks/03-firewall.yml
+# File: tasks/common/firewall.yml
 #
 # Description:
 #   Playbook for UrBackup server
