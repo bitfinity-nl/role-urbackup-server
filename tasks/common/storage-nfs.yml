@@ -1,9 +1,13 @@
 ---
-# Title: NFS share
+# Title: NFS share for UrBackup
+#
+# Author: Bitfinity-NL
+# Owner: Bitfinity-NL
 #
 # File: tasks/common/storage-nfs.yml
 #
 # Description:
+#   Configure NFS-share for UrBackup server. 
 #   
 - name: "Install APT packages"
   ansible.builtin.apt:
