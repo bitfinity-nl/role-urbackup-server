@@ -23,4 +23,4 @@
   when: urbackup_docker_docker == 'false'
   
 - name: "Install and configure UFW Firewall for UrBackup server"
-  include_tasks: 03-firewall.yml
+  include_tasks: common/firewall.yml
