@@ -13,25 +13,25 @@
     update_cache: yes
     state: present
 
-- name: "Ensure mountpoint {{ urbackup_nfs_mountpoint }} exists"
+- name: "Ensure mountpoint '{{ urbackup_nfs_share_mountpoint }}' exists"
   ansible.builtin.file:
-    path: "{{ urbackup_nfs_mountpoint }}"
+    path: "{{ urbackup_nfs_share_mountpoint }}"
     state: directory
     owner: root
     group: root
     mode: '0000'  # Disable writing for everyone, if mounting fails.
 
-- name: "Mount NFS path for UrBackup server"
+- name: "Mount NFS share '{{ urbackup_nfs_share_mountpoint }}' to '{{ urbackup_nfs_share_source }}' for UrBackup server"
   ansible.posix.mount:
-    src: "{{ nfs_share_source }}"
-    path: "{{ urbackup_nfs_mountpoint }}"
+    src: "{{ urbackup_nfs_share_source }}"
+    path: "{{ urbackup_nfs_share_mountpoint }}"
     opts: defaults
     state: mounted
     fstype: nfs4
 
-- name: "Correct permissions on {{ urbackup_nfs_mountpoint} when mounted"
+- name: "Correct permissions on '{{ urbackup_nfs_share_mountpoint}' when mounted"
   ansible.builtin.file:
-    path: "{{ urbackup_nfs_mountpoint }}"
+    path: "{{ urbackup_nfs_share_mountpoint }}"
     state: directory
     owner: urbackup
     group: urbackup
