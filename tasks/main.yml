@@ -10,12 +10,15 @@
 #   Playbook for UrBackup server
 #   on a Ubuntu server.
 #
+- name: "Configure NFS storage for UrBackup"
+  include_tasks: common/storage-nfs.yml
+  when: urbackup_nfs_share_use == 'true'
 
-- name: "Install UrBackup server docker on host"
+- name: "Install UrBackup server via docker"
   include_tasks: docker/01-urbackup-server-docker.yml
   when: urbackup_docker_docker == 'true'
   
-- name: "Install UrBackup server"
+- name: "Install UrBackup server via APT"
   include_tasks: apt/01-urbackup-server.yml
   when: urbackup_docker_docker == 'false'
   
